@@ -11,7 +11,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'auto-pairs-gentle'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
@@ -42,7 +41,7 @@ call vundle#end()
 "字体/配色
 colorscheme molokai
 set guifont=Source\ Code\ Pro:h11.5,Consolas:h12
-set guifontwide=Consolas:h12 
+set guifontwide=YaHei,Consolas:h12 
 
 "去掉工具条、菜单栏、滚动条
 "set go=aAce              
@@ -234,13 +233,15 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_camel_case = 1
 
 " syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
+"let g:syntastic_check_on_open = 1
+let g:syntastic_error_symbol = '!'
+let g:syntastic_warning_symbol = '✗'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
+let g:syntastic_javascript_syntax_checker="jshint"
+let g:syntastic_javascript_jshint_args="--config $VIM/.jshintrc"
 
 "jsbeautify
 au FileType javascript nmap <Leader>jj :call JsBeautify()<cr>
