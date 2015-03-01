@@ -17,7 +17,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Shougo/neocomplcache'
 Plugin 'msanders/snipmate.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'itchyny/lightline.vim'
+"Plugin 'itchyny/lightline.vim'
 
 "colorscheme
 Plugin 'tomasr/molokai'
@@ -41,11 +41,11 @@ call vundle#end()
 "字体/配色
 colorscheme molokai
 set guifont=Source\ Code\ Pro:h11.5,Consolas:h12
-set guifontwide=YaHei,Consolas:h12 
+set guifontwide=YouYuan,YaHei,Consolas:h12 
 
 "去掉工具条、菜单栏、滚动条
-"set go=aAce              
-"set guioptions-=m 
+set go=aAce              
+set guioptions-=m 
 set shm+=I
 set guioptions-=T
 
@@ -224,24 +224,27 @@ nmap <Leader>l :clist<cr>
 nmap <Leader>w :cw<cr>
 
 "********************************plugin setting**************************************
+"snipMate
+let g:snippets_dir = $VIM."/vimfiles/snippets/"
 
-"NERDTree配置
+"NERDTree
 let NERDTreeDirArrows=1 "目录箭头 1 显示箭头  0传统+-|号
+let NERDTreeStatusline=''
 
-"neocomplcache配置
+"neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_camel_case = 1
 
 " syntastic
 "let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol = '!'
-let g:syntastic_warning_symbol = '✗'
+let g:syntastic_error_symbol = '•'
+let g:syntastic_warning_symbol = '!'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 let g:syntastic_javascript_syntax_checker="jshint"
-let g:syntastic_javascript_jshint_args="--config $VIM/.jshintrc"
+let g:syntastic_javascript_jshint_args="--config ".$VIM."/vimfiles/syntax/.jshintrc"
 
 "jsbeautify
 au FileType javascript nmap <Leader>jj :call JsBeautify()<cr>
@@ -265,4 +268,24 @@ au FileType php setlocal dict+=$VIM/vimfiles/dict/php.dict
 au FileType php,javascript,html,xml,json,css,txt,vim,vimwiki set ff=dos
 
 
+"********************************statusline**************************************
 
+au BufLeave,BufNew,BufRead,BufNewFile,BufEnter * call <SID>SetFullStatusline()
+
+"状态栏颜色
+hi StatuslinePath       guibg=#01ABAA guifg=black
+hi StatuslineFileName   guibg=#D90073 guifg=black
+hi StatuslineFileEnc    guibg=#1BA0E1 guifg=black
+hi StatuslineFileType   guibg=#D8C101 guifg=black
+hi StatuslineTime       guibg=#A20025 guifg=black
+hi StatuslineLocate     guibg=#6A00FF guifg=black
+
+fun! s:SetFullStatusline() 
+  setlocal statusline=
+  setlocal statusline+=%#StatuslinePath#\ %r%{getcwd()}\\%h " path
+  setlocal statusline+=%#StatuslineFileName#\ \%t\                       " file name
+  setlocal statusline+=%#StatuslineFileEnc#\ [%{&fileencoding}]\        " file encoding
+  setlocal statusline+=%#StatuslineFileType#\ [%{strlen(&ft)?&ft:'**'}]\               "filetype
+  setlocal statusline+=%#StatuslineLocate#%=%l/%L,%c  
+  setlocal statusline+=\ %#StatuslineTime#%{strftime(\"%m-%d\ %H:%M\")} " current time
+endfunction 
