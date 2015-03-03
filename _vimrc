@@ -10,28 +10,33 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'auto-pairs-gentle'
+Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'Shougo/neocomplcache'
 Plugin 'msanders/snipmate.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'itchyny/lightline.vim'
+Plugin 'Lokaltog/vim-easymotion'
 
 "colorscheme
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/vim-tomorrow-theme'
 
 "lang
 Plugin 'pangloss/vim-javascript'
+Plugin 'jQuery'
 Plugin 'elzr/vim-json'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'othree/javascript-syntax.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'myhere/vim-nodejs-complete'
 Plugin 'alpaca-tc/html5.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'spf13/PIV'
-Plugin 'myhere/vim-nodejs-complete'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 
 call vundle#end()
@@ -48,6 +53,7 @@ set go=aAce
 set guioptions-=m 
 set shm+=I
 set guioptions-=T
+set guitablabel=%N:%M%t
 
 "高亮光标所在的行
 set cursorline
@@ -69,10 +75,8 @@ set helplang=cn
 "********************************encoding**************************************
 "默认为 UTF-8 编码
 set encoding=utf-8
-set fileencoding=utf-8
+set termencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,latin1
-set fileencoding=utf-8 
-let &termencoding=&encoding
 
 "********************************system**************************************
 
@@ -217,11 +221,8 @@ nmap <Leader>te :Tabularize /=<cr>
 nmap <Leader>tm :Tabularize /:<cr>
 nmap <Leader>tc :Tabularize /\/\/<cr> "排序注释
 
-"搜索
-nmap <Leader>n :cnext<cr>
-nmap <Leader>p :cprev<cr>
-nmap <Leader>l :clist<cr>
-nmap <Leader>w :cw<cr>
+"easymotion
+nmap f <Plug>(easymotion-prefix)
 
 "********************************plugin setting**************************************
 "snipMate
@@ -230,6 +231,7 @@ let g:snippets_dir = $VIM."/vimfiles/snippets/"
 "NERDTree
 let NERDTreeDirArrows=1 "目录箭头 1 显示箭头  0传统+-|号
 let NERDTreeStatusline=''
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\.lnk$']
 
 "neocomplcache
 let g:neocomplcache_enable_at_startup = 1
@@ -245,6 +247,9 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 let g:syntastic_javascript_syntax_checker="jshint"
 let g:syntastic_javascript_jshint_args="--config ".$VIM."/vimfiles/syntax/.jshintrc"
+
+"javascript-libraries-syntax
+let g:used_javascript_libs = 'underscore,backbone,jquery,angularjs,requirejs'
 
 "jsbeautify
 au FileType javascript nmap <Leader>jj :call JsBeautify()<cr>
@@ -281,11 +286,12 @@ hi StatuslineTime       guibg=#A20025 guifg=black
 hi StatuslineLocate     guibg=#6A00FF guifg=black
 
 fun! s:SetFullStatusline() 
-  setlocal statusline=
-  setlocal statusline+=%#StatuslinePath#\ %r%{getcwd()}\\%h " path
-  setlocal statusline+=%#StatuslineFileName#\ \%t\                       " file name
-  setlocal statusline+=%#StatuslineFileEnc#\ [%{&fileencoding}]\        " file encoding
-  setlocal statusline+=%#StatuslineFileType#\ [%{strlen(&ft)?&ft:'**'}]\               "filetype
-  setlocal statusline+=%#StatuslineLocate#%=%l/%L,%c  
-  setlocal statusline+=\ %#StatuslineTime#%{strftime(\"%m-%d\ %H:%M\")} " current time
+    setlocal statusline=
+    setlocal statusline+=%#StatuslinePath#\ %r%{getcwd()}\\%h " path
+    setlocal statusline+=%#StatuslineFileName#\ \%t\                       " file name
+    setlocal statusline+=%#StatuslineFileEnc#\ [%{&fileencoding}]\        " file encoding
+    setlocal statusline+=%#StatuslineFileType#\ [%{strlen(&ft)?&ft:'**'}]\               "filetype
+    setlocal statusline+=%#StatuslineLocate#%=%l/%L,%c  
+    setlocal statusline+=\ %#StatuslineTime#%{strftime(\"%m-%d\ %H:%M\")} " current time
+
 endfunction 
