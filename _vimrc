@@ -224,6 +224,9 @@ nmap <Leader>tc :Tabularize /\/\/<cr> "排序注释
 "easymotion
 nmap f <Plug>(easymotion-prefix)
 
+"f8唤起命令行工具
+nmap <f8> :!cmd <cr>
+
 "********************************plugin setting**************************************
 "snipMate
 let g:snippets_dir = $VIM."/vimfiles/snippets/"
@@ -272,6 +275,19 @@ au FileType php setlocal dict+=$VIM/vimfiles/dict/php.dict
 " 将指定文件的换行符转换成 dos 格式
 au FileType php,javascript,html,xml,json,css,txt,vim,vimwiki set ff=dos
 
+"********************************codeExec**************************************
+
+fun! ExecuteScript()
+    if &filetype == 'php'
+        exe ':!php %'
+    elseif &filetype == 'ruby'
+        exe ':!ruby %'
+    elseif &filetype == 'javascript'
+        exe ':!node %'
+    endif
+endfunction
+
+au FileType php,javascript,ruby nmap <f5> :call ExecuteScript()<cr>
 
 "********************************statusline**************************************
 
