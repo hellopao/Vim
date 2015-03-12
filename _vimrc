@@ -38,6 +38,7 @@ Plugin 'spf13/PIV'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 
@@ -284,10 +285,12 @@ fun! ExecuteScript()
         exe ':!ruby %'
     elseif &filetype == 'javascript'
         exe ':!node %'
+    elseif &filetype == 'typescript'
+        exe ':make'
     endif
 endfunction
 
-au FileType php,javascript,ruby nmap <f5> :call ExecuteScript()<cr>
+au FileType php,javascript,ruby,typescript nmap <f5> :call ExecuteScript()<cr>
 
 "********************************statusline**************************************
 
