@@ -1,5 +1,5 @@
 "********************************plugins**************************************
-"git clone https://github.com/gmarik/vundle.git  ~/.vim/bundle/vundle
+"git clone https://github.com/gmarik/vundle.git  ./vimfiles/bundle/vundle
 set rtp+=$VIM/vimfiles/bundle/vundle/
 call vundle#begin()
 
@@ -18,11 +18,13 @@ Plugin 'Shougo/neocomplcache'
 Plugin 'msanders/snipmate.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 "colorscheme
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'bclear'
 
 "lang
 Plugin 'pangloss/vim-javascript'
@@ -30,8 +32,8 @@ Plugin 'jQuery'
 Plugin 'elzr/vim-json'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'othree/javascript-syntax.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'myhere/vim-nodejs-complete'
+Plugin 'mattn/emmet-vim'
 Plugin 'alpaca-tc/html5.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'spf13/PIV'
@@ -45,7 +47,7 @@ call vundle#end()
 "********************************ui**************************************
 
 "字体/配色
-colorscheme molokai
+colorscheme bclear
 set guifont=Source\ Code\ Pro:h11.5,Consolas:h12
 set guifontwide=YouYuan,YaHei,Consolas:h12 
 
@@ -63,7 +65,7 @@ if has('gui_running')
     "自动最大化窗口
     au GUIEnter * simalt ~x
     "给 Win32 下的 gVim 窗口设置透明度
-    "au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 237)
+    au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 237)
 endif
 
 "********************************language**************************************
@@ -234,8 +236,9 @@ let g:snippets_dir = $VIM."/vimfiles/snippets/"
 
 "NERDTree
 let NERDTreeDirArrows=1 "目录箭头 1 显示箭头  0传统+-|号
+let NERDTreeShowHidden = 0
 let NERDTreeStatusline=''
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\.lnk$']
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$', '\.lnk$']
 
 "neocomplcache
 let g:neocomplcache_enable_at_startup = 1
@@ -254,6 +257,12 @@ let g:syntastic_javascript_jshint_args="--config ".$VIM."/vimfiles/syntax/.jshin
 
 "javascript-libraries-syntax
 let g:used_javascript_libs = 'underscore,backbone,jquery,angularjs,requirejs'
+
+"indent guide
+let g:indent_guides_guide_size=1
+
+"markdown
+let g:vim_markdown_folding_disabled=1
 
 "jsbeautify
 au FileType javascript nmap <Leader>jj :call JsBeautify()<cr>
