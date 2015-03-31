@@ -8,22 +8,24 @@ Plugin 'gmarik/vundle'
 
 "tools
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'Shougo/neocomplcache'
-Plugin 'msanders/snipmate.vim'
+Plugin 'SirVer/ultisnips'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimshell.vim'
 
 "colorscheme
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'bclear'
 
 "lang
@@ -37,6 +39,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'alpaca-tc/html5.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'spf13/PIV'
+Plugin 'StanAngeloff/php.vim'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
@@ -156,7 +159,7 @@ set backspace=indent,eol,start
 set mouse=a
 
 "自动改变当前目录
-set autochdir
+"set autochdir
 
 "备份和缓存
 set nobackup
@@ -177,7 +180,7 @@ syntax on
 filetype plugin indent on
 
 " 配置文件.vimrc更改后自动重新载入使设置生效
-autocmd! bufwritepost _vimrc source $VIM/_vimrc 
+autocmd! bufwritepost _vimrc source %
 
 "********************************mapping**************************************
 
@@ -227,12 +230,15 @@ nmap <Leader>tc :Tabularize /\/\/<cr> "排序注释
 "easymotion
 nmap f <Plug>(easymotion-prefix)
 
+"vimshell
+nmap <Leader>ts :VimShellTab<cr>
+
 "f8唤起命令行工具
 nmap <f8> :!cmd <cr>
 
 "********************************plugin setting**************************************
-"snipMate
-let g:snippets_dir = $VIM."/vimfiles/snippets/"
+"ultisnips
+let g:UltiSnipsSnippetsDir = $VIM."/vimfiles/snippets/"
 
 "NERDTree
 let NERDTreeDirArrows=1 "目录箭头 1 显示箭头  0传统+-|号
@@ -254,9 +260,6 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 let g:syntastic_javascript_syntax_checker="jshint"
 let g:syntastic_javascript_jshint_args="--config ".$VIM."/vimfiles/syntax/.jshintrc"
-
-"javascript-libraries-syntax
-let g:used_javascript_libs = 'underscore,backbone,jquery,angularjs,requirejs'
 
 "indent guide
 let g:indent_guides_guide_size=1
