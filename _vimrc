@@ -24,7 +24,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
 
 "colorscheme
-Plugin 'tomasr/molokai'
+"Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bclear'
 
