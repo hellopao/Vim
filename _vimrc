@@ -296,7 +296,11 @@ fun! ExecuteScript()
     elseif &filetype == 'ruby'
         exe ':!ruby %'
     elseif &filetype == 'javascript'
-        exe ':!node %'
+        if expand('%') == 'gulpfile.js'
+            exec ':!gulp'
+        else
+            exe ':!node %'
+        endif
     elseif &filetype == 'typescript'
         exe ':make'
     endif
