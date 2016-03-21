@@ -1,5 +1,4 @@
 "********************************plugins**************************************
-"git clone https://github.com/gmarik/vundle.git  ./vimfiles/bundle/vundle
 set rtp+=$VIM/vimfiles/bundle/vundle/
 call vundle#begin()
 
@@ -20,17 +19,16 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'Valloric/YouCompleteMe'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimshell.vim'
 
 "colorscheme
 "Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bclear'
 
 "lang
 Plugin 'pangloss/vim-javascript'
-Plugin 'jQuery'
+"Plugin 'jQuery'
 Plugin 'elzr/vim-json'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'othree/javascript-syntax.vim'
@@ -50,7 +48,7 @@ call vundle#end()
 "********************************ui**************************************
 
 "字体/配色
-colorscheme bclear
+colorscheme molokai
 set guifont=Source\ Code\ Pro:h11.5,Consolas:h12
 set guifontwide=YouYuan,YaHei,Consolas:h12 
 
@@ -301,12 +299,10 @@ fun! ExecuteScript()
         else
             exe ':!node %'
         endif
-    elseif &filetype == 'typescript'
-        exe ':make'
     endif
 endfunction
 
-au FileType php,javascript,ruby,typescript nmap <f5> :call ExecuteScript()<cr>
+au FileType php,javascript,ruby nmap <f5> :call ExecuteScript()<cr>
 
 "********************************statusline**************************************
 
